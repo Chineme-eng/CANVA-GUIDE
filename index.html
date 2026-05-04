@@ -19,6 +19,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -60,13 +61,14 @@
         nav ul li a {
             color: #ccc;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: 0.3s;
+            display: block;
         }
 
         nav ul li a:hover {
             color: var(--primary);
-            padding-left: 5px;
+            transform: translateX(5px);
         }
 
         /* Main Content */
@@ -97,11 +99,16 @@
             margin-top: 2rem;
             margin-bottom: 1rem;
             font-weight: 600;
+            color: #333;
         }
 
-        p {
+        p, li {
             margin-bottom: 1.2rem;
             color: #444;
+        }
+
+        ul {
+            padding-left: 1.5rem;
         }
 
         /* Tables */
@@ -149,13 +156,15 @@
             padding: 0.2rem 0.4rem;
             border-radius: 4px;
             font-family: monospace;
+            color: #d63384;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             body { flex-direction: column; }
-            nav { width: 100%; height: auto; position: relative; }
+            nav { width: 100%; height: auto; position: relative; padding: 1.5rem; }
             main { margin-left: 0; padding: 1.5rem; }
+            section { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -167,8 +176,11 @@
             <li><a href="#licensing">1. Licensing Essentials</a></li>
             <li><a href="#sizing">2. Custom Size Master Chart</a></li>
             <li><a href="#saving">3. Saving & Export Secrets</a></li>
-            <li><a href="#delivery">4. The Delivery PDF Protocol</a></li>
+            <li><a href="#delivery">4. Delivery PDF Protocol</a></li>
             <li><a href="#legal">5. Legal & Trademarks</a></li>
+            <li><a href="#ai-workflow">6. AI 2.0 & Bulk Creation</a></li>
+            <li><a href="#accessibility">7. Accessibility Standards</a></li>
+            <li><a href="#app-stack">8. The Seller's App Stack</a></li>
         </ul>
     </nav>
 
@@ -290,13 +302,61 @@
 
         <section id="legal">
             <h2>5. Legal & Trademarks</h2>
-            <p>One of the most misunderstood areas of Canva. Pay close attention to these 2026 updates:</p>
+            <p>One of the most misunderstood areas of Canva design. Pay close attention to these rules:</p>
             
             <h3>Logo Trademarks</h3>
             <p>You <strong>cannot</strong> trademark a logo that uses Canva stock elements. To create a trademarkable logo for a client, you must use only basic lines/shapes or upload your own original vector art.</p>
 
             <h3>The "Client" Transfer</h3>
             <p>If you design for a specific client (not a mass-market digital product), you can transfer the design to them, but they are still bound by Canva's licensing terms regarding the Pro elements inside.</p>
+        </section>
+
+        <section id="ai-workflow">
+            <h2>6. AI 2.0 & Bulk Creation</h2>
+            <p>Scaling your shop requires smart automation. While Canva handles the visual output, utilizing an all-in-one AI platform like Picao AI is an excellent way to ideate, create, and launch faster by bringing your research, copywriting, and planning into one simple, unified workspace. Once your strategy and content are dialed in, use these features to 10x your visual production:</p>
+            
+            <div class="pro-tip">
+                <strong>Bulk Create via CSV:</strong> Create one "Master Slide," upload a CSV file with 50 quotes or tips, and Canva will instantly generate 50 unique posts. This is the #1 secret for selling high-volume "Social Media Bundles."
+            </div>
+            
+            <p><strong>Magic Switch:</strong> Use this to turn one product into five. A "Daily Planner" PDF can be converted into a "Mobile Wallpaper" and an "Instagram Post" with a single click, allowing you to quickly build out comprehensive product ecosystems.</p>
+        </section>
+
+        <section id="accessibility">
+            <h2>7. Accessibility Standards (WCAG)</h2>
+            <p>Accessibility is no longer optional. Accessible digital products rank higher in search algorithms and reach a significantly wider customer base.</p>
+            <ul>
+                <li><strong>Readability:</strong> Keep body text at 14pt minimum.</li>
+                <li><strong>Color Contrast:</strong> Use the <em>Canva Accessibility Checker</em> app. If your design fails the "Contrast" test, adjust your palette until it passes the 4.5:1 ratio.</li>
+                <li><strong>Flat Text:</strong> Avoid using heavy "Text Effects" (like Curve or Glitch) for critical information, as screen reading software struggles to parse them correctly.</li>
+            </ul>
+        </section>
+
+        <section id="app-stack">
+            <h2>8. The Seller's App Stack</h2>
+            <p>Leverage the Canva App Marketplace to create professional-grade listings directly inside your workspace.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>App Name</th>
+                        <th>Best Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mockups</strong></td>
+                        <td>Creating realistic, high-converting listing photos for Etsy, Shopify, or Stan Store.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TypeGradient</strong></td>
+                        <td>Creating premium, high-end "metallic" or textured text styles for luxury digital products.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Color Palette</strong></td>
+                        <td>Extracting precise color codes from reference images to quickly build niche-specific Brand Kits.</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
     </main>
 
