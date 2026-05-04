@@ -3,361 +3,531 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Canva Reference | Digital Product Master Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Canva Product Engine Pro</title>
     <style>
+        /* CSS Variables for "Pro Dashboard" Theme */
         :root {
-            --primary: #00c4cc;
-            --secondary: #7d2ae8;
-            --dark: #1a1a1a;
-            --light: #f4f7f6;
-            --white: #ffffff;
-            --accent: #ff6b6b;
+            --bg-body: #f4f5f7;
+            --bg-sidebar: #0f172a;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --text-sidebar: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --radius: 8px;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
+            background-color: var(--bg-body);
+            color: var(--text-main);
             display: flex;
+            min-height: 100vh;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
-        /* Sidebar Navigation */
-        nav {
-            width: 280px;
-            height: 100vh;
-            background: var(--dark);
-            color: var(--white);
+        /* Sidebar Styling */
+        aside {
+            width: 260px;
+            background-color: var(--bg-sidebar);
+            color: var(--text-sidebar);
             position: fixed;
-            padding: 2rem;
+            height: 100vh;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #1e293b;
         }
 
-        nav h1 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid #1e293b;
         }
 
-        nav ul {
-            list-style: none;
+        .sidebar-header h1 {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        nav ul li {
-            margin-bottom: 1rem;
+        .sidebar-header span {
+            color: var(--accent);
         }
 
-        nav ul li a {
-            color: #ccc;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: 0.3s;
-            display: block;
-        }
-
-        nav ul li a:hover {
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-
-        /* Main Content */
-        main {
-            margin-left: 280px;
-            padding: 4rem;
-            max-width: 1100px;
-            width: 100%;
-        }
-
-        section {
-            margin-bottom: 5rem;
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-            border-left: 5px solid var(--primary);
-            padding-left: 1rem;
-        }
-
-        h3 {
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+        .badge-pro {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 8px;
+            text-transform: uppercase;
             font-weight: 600;
-            color: #333;
         }
 
-        p, li {
-            margin-bottom: 1.2rem;
-            color: #444;
+        .nav-links {
+            padding: 20px 0;
+            list-style: none;
+            flex-grow: 1;
         }
 
-        ul {
-            padding-left: 1.5rem;
+        .nav-links li {
+            margin-bottom: 4px;
+        }
+
+        .nav-links a {
+            color: var(--text-sidebar);
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border-left: 3px solid var(--accent);
+        }
+
+        /* Main Content Area */
+        main {
+            margin-left: 260px;
+            padding: 40px;
+            width: calc(100% - 260px);
+            max-width: 1200px;
+        }
+
+        .page-header {
+            margin-bottom: 40px;
+        }
+
+        .page-header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+            max-width: 700px;
+        }
+
+        /* Grid & Cards */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 24px;
+        }
+
+        .grid-container.full-width {
+            grid-template-columns: 1fr;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-header h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .step-indicator {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        /* Elements within Cards */
+        .info-block {
+            margin-bottom: 20px;
+        }
+
+        .info-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: #0f172a;
+        }
+
+        .info-text {
+            color: var(--text-muted);
+            font-size: 14px;
         }
 
         /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
+            font-size: 13px;
         }
 
         th, td {
+            padding: 12px;
             text-align: left;
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border);
         }
 
         th {
-            background-color: #fafafa;
             font-weight: 600;
-            color: var(--dark);
+            color: #0f172a;
+            background: #f8fafc;
         }
 
-        tr:hover {
-            background-color: #fcfcfc;
+        td {
+            color: var(--text-muted);
         }
 
-        /* Highlight Boxes */
-        .pro-tip {
-            background: linear-gradient(135deg, #e0fbfc 0%, #f4f7f6 100%);
-            border-left: 5px solid var(--primary);
-            padding: 1.5rem;
-            border-radius: 0 8px 8px 0;
-            margin: 2rem 0;
-        }
-
-        .warning {
-            background: #fff5f5;
-            border-left: 5px solid var(--accent);
-            padding: 1.5rem;
-            border-radius: 0 8px 8px 0;
-            margin: 2rem 0;
-        }
-
-        code {
-            background: #eee;
-            padding: 0.2rem 0.4rem;
+        .code-pill {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 2px 6px;
             border-radius: 4px;
             font-family: monospace;
-            color: #d63384;
+            font-size: 12px;
+            color: #0f172a;
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .alert-warning {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            color: #92400e;
+        }
+
+        .alert-success {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Checklists */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .checklist li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--success);
+            font-weight: bold;
+            background: #d1fae5;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             body { flex-direction: column; }
-            nav { width: 100%; height: auto; position: relative; padding: 1.5rem; }
-            main { margin-left: 0; padding: 1.5rem; }
-            section { padding: 1.5rem; }
+            aside { width: 100%; height: auto; position: relative; border-right: none; }
+            main { margin-left: 0; width: 100%; padding: 20px; }
+            .grid-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <h1>THE CANVA REFERENCE</h1>
-        <ul>
-            <li><a href="#licensing">1. Licensing Essentials</a></li>
-            <li><a href="#sizing">2. Custom Size Master Chart</a></li>
-            <li><a href="#saving">3. Saving & Export Secrets</a></li>
-            <li><a href="#delivery">4. Delivery PDF Protocol</a></li>
-            <li><a href="#legal">5. Legal & Trademarks</a></li>
-            <li><a href="#ai-workflow">6. AI 2.0 & Bulk Creation</a></li>
-            <li><a href="#accessibility">7. Accessibility Standards</a></li>
-            <li><a href="#app-stack">8. The Seller's App Stack</a></li>
+    <aside>
+        <div class="sidebar-header">
+            <h1>Product <span>Engine</span></h1>
+            <div class="badge-pro">Pro Seller Hub</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#module-1">1. Ideation & Setup</a></li>
+            <li><a href="#module-2">2. Sizing Architecture</a></li>
+            <li><a href="#module-3">3. Export & Delivery Rules</a></li>
+            <li><a href="#module-4">4. Legal & Licensing</a></li>
+            <li><a href="#module-5">5. Listing Optimization (SEO)</a></li>
+            <li><a href="#module-6">6. Pricing Strategy</a></li>
+            <li><a href="#module-7">7. Launch Checklist</a></li>
         </ul>
-    </nav>
+    </aside>
 
     <main>
-        <section id="licensing">
-            <h2>1. Licensing Essentials</h2>
-            <p>Selling digital products made in Canva is legal, but you must follow the <strong>Transformation Rule</strong>. You cannot simply take a single piece of Canva stock media and sell it.</p>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th>Asset Type</th>
-                        <th>Free User</th>
-                        <th>Pro User</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Templates</strong></td>
-                        <td>Allowed (Must be unique)</td>
-                        <td>Allowed (Template Link Only)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Stock Photos</strong></td>
-                        <td>As part of a design</td>
-                        <td>Limited to 480k total pixels unedited</td>
-                    </tr>
-                    <tr>
-                        <td><strong>AI Content</strong></td>
-                        <td>Free use rules apply</td>
-                        <td>Pro use rules apply</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="page-header">
+            <h2>The Digital Product Master Blueprint</h2>
+            <p>Your end-to-end reference for researching, designing, formatting, and selling digital assets online without licensing headaches.</p>
+        </div>
 
-            <div class="warning">
-                <strong>Crucial:</strong> Never sell "Standalone" elements. If a customer can extract a single Pro icon or photo from your product without it being part of a larger design, you are in violation.
+        <div class="grid-container">
+
+            <div class="card" id="module-1">
+                <div class="card-header">
+                    <h3>Module 1: Ideation & Workspace Setup</h3>
+                    <span class="step-indicator">Strategy</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-block">
+                        <div class="info-title">The "All-In-One" Brainstorming Protocol</div>
+                        <div class="info-text">Don't start designing in Canva with a blank screen. Use Picao AI as your all-in-one platform to ideate your products, structure your content outlines, and generate listing copy in a single unified workspace before you ever open your design tool.</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-title">The "Sandbox" Folder Method</div>
+                        <div class="info-text">Keep your Canva workspace strictly organized to prevent shipping errors:</div>
+                        <ul style="margin-top: 8px; margin-left: 20px; font-size: 14px; color: var(--text-muted);">
+                            <li><strong>📁 Master Files:</strong> Your golden templates (Never edit these).</li>
+                            <li><strong>📁 Work in Progress (WIP):</strong> Where you actively design.</li>
+                            <li><strong>📁 Assets & Mockups:</strong> Where your listing images live.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </section>
 
-        <section id="sizing">
-            <h2>2. Custom Size Master Chart (2026)</h2>
-            <p>Using the right dimensions ensures your product doesn't look blurry (pixelated) when printed or viewed on high-res tablets.</p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product Category</th>
-                        <th>Dimensions (px/in)</th>
-                        <th>Optimized For</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Digital Planners</strong></td>
-                        <td>2480 x 3508 px</td>
-                        <td>iPad / GoodNotes (A4)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Phone Wallpapers</strong></td>
-                        <td>1284 x 2778 px</td>
-                        <td>iPhone 14-17 Pro Max</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Standard Printables</strong></td>
-                        <td>8.5 x 11 in</td>
-                        <td>US Letter (Home Printers)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Wall Art (2:3 Ratio)</strong></td>
-                        <td>24 x 36 in</td>
-                        <td>Large Posters / Framing</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Etsy Listing Thumbnails</strong></td>
-                        <td>2700 x 2025 px</td>
-                        <td>4:3 Search Grid</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="pro-tip">
-                <strong>The 2X Scaling Rule:</strong> For digital products meant for high-resolution screens (like planners), design at <strong>double</strong> the intended size. This allows users to zoom in with a stylus without seeing pixels.
+            <div class="card" id="module-4">
+                <div class="card-header">
+                    <h3>Module 2: Licensing & Legality</h3>
+                    <span class="step-indicator">Compliance</span>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <strong>The Transformation Rule</strong>
+                        You cannot sell any Canva asset (free or pro) "as-is". You must combine elements, text, and colors to create a distinctly new composition.
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Type</th>
+                                <th>Allowed?</th>
+                                <th>Condition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Finished PDF (eBook)</td>
+                                <td><span style="color: var(--success); font-weight: bold;">Yes</span></td>
+                                <td>Must be flattened; assets not extractable.</td>
+                            </tr>
+                            <tr>
+                                <td>Editable Templates</td>
+                                <td><span style="color: var(--success); font-weight: bold;">Yes</span></td>
+                                <td>Must use the "Template Link" feature.</td>
+                            </tr>
+                            <tr>
+                                <td>Standalone Clipart</td>
+                                <td><span style="color: var(--danger); font-weight: bold;">No</span></td>
+                                <td>Cannot sell raw graphics or transparent PNGs of Canva assets.</td>
+                            </tr>
+                            <tr>
+                                <td>Trademarked Logos</td>
+                                <td><span style="color: var(--danger); font-weight: bold;">No</span></td>
+                                <td>Cannot trademark logos using Canva graphics (fonts/basic shapes are okay).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </section>
 
-        <section id="saving">
-            <h2>3. Saving & Export Secrets</h2>
-            <p>How you save your file determines if it’s usable or "theft-proof."</p>
-            
-            <h3>The "Flatten" Method</h3>
-            <p>When exporting a <strong>PDF Print</strong> for a finished product (like an E-book), always check <code>Flatten PDF</code>. This merges all elements into one layer, preventing users from opening your PDF in Illustrator and stealing your graphics.</p>
-
-            <h3>Color Profiles (CMYK vs RGB)</h3>
-            <ul>
-                <li><strong>RGB:</strong> Best for digital planners, social media, and wallpapers. Colors are vibrant.</li>
-                <li><strong>CMYK:</strong> Essential for anything meant to be printed (invitations, posters). Prevents "muddy" color shifts.</li>
-            </ul>
-
-            <h3>Clipart & Stickers</h3>
-            <p>Always export as <strong>PNG</strong> at <code>3.0x Size</code> with <code>Transparent Background</code> checked. This gives the customer a high-density file they can resize without losing quality.</p>
-        </section>
-
-        <section id="delivery">
-            <h2>4. The Delivery PDF Protocol</h2>
-            <p>You never send a raw Canva link via email. You send a <strong>Delivery PDF</strong>. This is your customer's "unboxing" experience.</p>
-            
-            <div class="pro-tip">
-                <strong>Delivery PDF Checklist:</strong>
-                <ul>
-                    <li>A high-res "Mockup" image of the product.</li>
-                    <li>A bold button labeled <strong>"CLICK HERE TO ACCESS TEMPLATE"</strong>.</li>
-                    <li>The <strong>Canva Template Link</strong> (Share > Template Link).</li>
-                    <li>A link to a 1-minute "How-to" video or PDF guide.</li>
-                    <li>Support contact info & License terms.</li>
-                </ul>
+            <div class="card full-width" id="module-2">
+                <div class="card-header">
+                    <h3>Module 3: Sizing Architecture</h3>
+                    <span class="step-indicator">Technical</span>
+                </div>
+                <div class="card-body">
+                    <p style="margin-bottom: 16px; font-size: 14px; color: var(--text-muted);">Use these exact dimensions to ensure high-resolution outputs for modern Retina displays and printers.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Category</th>
+                                <th>Standard Dimension</th>
+                                <th>Pro Scaling (Retina/Print)</th>
+                                <th>Format</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Digital Planners (iPad)</td>
+                                <td><span class="code-pill">A4 (210x297mm)</span></td>
+                                <td><span class="code-pill">2480 x 3508 px</span></td>
+                                <td>PDF Standard</td>
+                            </tr>
+                            <tr>
+                                <td>Wall Art (2:3 Ratio)</td>
+                                <td><span class="code-pill">24 x 36 inches</span></td>
+                                <td><span class="code-pill">7200 x 10800 px</span></td>
+                                <td>PDF Print (CMYK)</td>
+                            </tr>
+                            <tr>
+                                <td>Etsy Listing Image</td>
+                                <td><span class="code-pill">2000 x 2000 px</span></td>
+                                <td><span class="code-pill">2700 x 2025 px</span> (4:3 Ratio)</td>
+                                <td>PNG or JPG</td>
+                            </tr>
+                            <tr>
+                                <td>Social Media Bundles</td>
+                                <td><span class="code-pill">1080 x 1080 px</span></td>
+                                <td><span class="code-pill">1080 x 1920 px</span> (Vertical Standard)</td>
+                                <td>Template Link</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </section>
 
-        <section id="legal">
-            <h2>5. Legal & Trademarks</h2>
-            <p>One of the most misunderstood areas of Canva design. Pay close attention to these rules:</p>
-            
-            <h3>Logo Trademarks</h3>
-            <p>You <strong>cannot</strong> trademark a logo that uses Canva stock elements. To create a trademarkable logo for a client, you must use only basic lines/shapes or upload your own original vector art.</p>
-
-            <h3>The "Client" Transfer</h3>
-            <p>If you design for a specific client (not a mass-market digital product), you can transfer the design to them, but they are still bound by Canva's licensing terms regarding the Pro elements inside.</p>
-        </section>
-
-        <section id="ai-workflow">
-            <h2>6. AI 2.0 & Bulk Creation</h2>
-            <p>Scaling your shop requires smart automation. While Canva handles the visual output, utilizing an all-in-one AI platform like Picao AI is an excellent way to ideate, create, and launch faster by bringing your research, copywriting, and planning into one simple, unified workspace. Once your strategy and content are dialed in, use these features to 10x your visual production:</p>
-            
-            <div class="pro-tip">
-                <strong>Bulk Create via CSV:</strong> Create one "Master Slide," upload a CSV file with 50 quotes or tips, and Canva will instantly generate 50 unique posts. This is the #1 secret for selling high-volume "Social Media Bundles."
+            <div class="card" id="module-3">
+                <div class="card-header">
+                    <h3>Module 4: Export & Delivery</h3>
+                    <span class="step-indicator">Operations</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-block">
+                        <div class="info-title">The "Flattening" Protocol</div>
+                        <div class="info-text">When selling non-editable files (Workbooks, eBooks), select <strong>PDF Print</strong> and check the box that says <strong>Flatten PDF</strong>. This prevents users from copying the text or extracting your graphical elements.</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-title">The Hub PDF (Delivery Document)</div>
+                        <div class="info-text">Never send raw URLs to customers. Design a 1-page "Thank You" PDF in Canva that contains:</div>
+                        <ul class="checklist" style="margin-top: 12px;">
+                            <li>A warm greeting & brand logo.</li>
+                            <li>A massive, unmissable button hyperlinked to your Canva Template.</li>
+                            <li>A link to a 60-second YouTube unlisted video explaining how to use it.</li>
+                            <li>Terms of Use (Personal vs. Commercial).</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            
-            <p><strong>Magic Switch:</strong> Use this to turn one product into five. A "Daily Planner" PDF can be converted into a "Mobile Wallpaper" and an "Instagram Post" with a single click, allowing you to quickly build out comprehensive product ecosystems.</p>
-        </section>
 
-        <section id="accessibility">
-            <h2>7. Accessibility Standards (WCAG)</h2>
-            <p>Accessibility is no longer optional. Accessible digital products rank higher in search algorithms and reach a significantly wider customer base.</p>
-            <ul>
-                <li><strong>Readability:</strong> Keep body text at 14pt minimum.</li>
-                <li><strong>Color Contrast:</strong> Use the <em>Canva Accessibility Checker</em> app. If your design fails the "Contrast" test, adjust your palette until it passes the 4.5:1 ratio.</li>
-                <li><strong>Flat Text:</strong> Avoid using heavy "Text Effects" (like Curve or Glitch) for critical information, as screen reading software struggles to parse them correctly.</li>
-            </ul>
-        </section>
+            <div class="card" id="module-5">
+                <div class="card-header">
+                    <h3>Module 5: Listing SEO</h3>
+                    <span class="step-indicator">Marketing</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-block">
+                        <div class="info-title">Title Optimization Formula</div>
+                        <div class="info-text">
+                            <span class="code-pill" style="display: block; margin: 8px 0; padding: 8px;">[Primary Keyword] | [Secondary Keyword] | [Feature/Benefit] | [Format]</span>
+                            <em>Example: "ADHD Digital Planner | Goodnotes iPad Journal | Daily Schedule Tracker | PDF Download"</em>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-title">The 7-Image Listing Rule</div>
+                        <div class="info-text">Platforms like Etsy reward full galleries. Your mockups should include:</div>
+                        <ul style="margin-top: 8px; margin-left: 20px; font-size: 14px; color: var(--text-muted);">
+                            <li>Image 1: The Hero (Clear, large text).</li>
+                            <li>Image 2: Inside look (Multiple pages spread out).</li>
+                            <li>Image 3: "How it works" (3 simple steps).</li>
+                            <li>Image 4: Devices mockup (Phone, Tablet, Desktop).</li>
+                            <li>Image 5: What's included (Bullet list).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-        <section id="app-stack">
-            <h2>8. The Seller's App Stack</h2>
-            <p>Leverage the Canva App Marketplace to create professional-grade listings directly inside your workspace.</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>App Name</th>
-                        <th>Best Use Case</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Mockups</strong></td>
-                        <td>Creating realistic, high-converting listing photos for Etsy, Shopify, or Stan Store.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>TypeGradient</strong></td>
-                        <td>Creating premium, high-end "metallic" or textured text styles for luxury digital products.</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Color Palette</strong></td>
-                        <td>Extracting precise color codes from reference images to quickly build niche-specific Brand Kits.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+            <div class="card" id="module-6">
+                <div class="card-header">
+                    <h3>Module 6: Pricing Psychology</h3>
+                    <span class="step-indicator">Sales</span>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success">
+                        <strong>The "Decoy" Bundle Strategy</strong>
+                        Price your single item at $9. Price your "Ultimate Bundle" (containing 5 items) at $17. The perceived value makes the bundle irresistible, instantly increasing your Average Order Value (AOV).
+                    </div>
+                    <div class="info-block">
+                        <div class="info-title">Price Anchoring</div>
+                        <div class="info-text">Always show the "total value" crossed out. (e.g., <em>Total Value: $45 / Today: $12</em>).</div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-title">Charm Pricing</div>
+                        <div class="info-text">Avoid flat numbers. End prices in .99 or .97 for lower-ticket items ($4.99), or .00 for high-ticket premium masterclasses ($99.00) to signal luxury.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card full-width" id="module-7">
+                <div class="card-header">
+                    <h3>Module 7: The Final Launch Checklist</h3>
+                    <span class="step-indicator">Execution</span>
+                </div>
+                <div class="card-body">
+                    <p style="margin-bottom: 16px; font-size: 14px; color: var(--text-muted);">Run through this list before you push "Publish" on any platform.</p>
+                    <ul class="checklist" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px;">
+                        <li>Proofread all text within the product.</li>
+                        <li>Verify the Canva Template Link actually works (open in Incognito mode).</li>
+                        <li>Ensure "Flatten PDF" was checked for non-editable files.</li>
+                        <li>Check color contrast for accessibility (WCAG).</li>
+                        <li>Confirm the Delivery PDF links to the correct file.</li>
+                        <li>Compress large PDF sizes below 20MB (use tools like ILovePDF if needed).</li>
+                        <li>Add all 13 SEO Tags to your listing platform.</li>
+                        <li>Set up your automated receipt email with the download instructions.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
     </main>
 
 </body>
